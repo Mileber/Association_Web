@@ -3,59 +3,51 @@
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver">
+		</property>
+		<property name="url" value="jdbc:mysql://localhost:3306/Association"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="123456"></property>
+	</bean>
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="configLocation"
-			value="classpath:hibernate.cfg.xml">
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
 		</property>
 		<property name="mappingResources">
 			<list>
-				<value>org/vo/Activity.hbm.xml</value>
-				<value>org/vo/Admin.hbm.xml</value>
-				<value>org/vo/Association.hbm.xml</value>
-				<value>org/vo/User.hbm.xml</value>
-				<value>org/vo/Usertoactivity.hbm.xml</value>
-				<value>org/vo/Usertoassociation.hbm.xml</value>
+				<value>org/model/Activity.hbm.xml</value>
+				<value>org/model/Admin.hbm.xml</value>
+				<value>org/model/Association.hbm.xml</value>
+				<value>org/model/User.hbm.xml</value>
+				<value>org/model/Usertoactivity.hbm.xml</value>
+				<value>org/model/Usertoassociation.hbm.xml</value>
 			</list>
 		</property>
 	</bean>
 	
-	<bean id="baseDao" class="org.dao.BaseDAO">
-		<property name="sessionFactory" ref="sessionFactory"/>
+	<bean name="checkActivityAction" class="org.action.CheckActivityAction">
+		<property name="activityDaoImpl">
+			<ref bean="activityDaoImpl"/>
+		</property>
 	</bean>
-	
-	<!--通过继承baseDao对各Dao进行依赖注入-->
-	<bean id="userDao" class="org.dao.impl.UserDaoImpl" parent="baseDao"/>
-	<bean id="adminDao" class="org.dao.impl.AdminDaoImpl" parent="baseDao"/>
-	<bean id="activityDao" class="org.dao.impl.ActivityDaoImpl" parent="baseDao"/>
-	<bean id="associationDao" class="org.dao.impl.AssociationDaoImpl" parent="baseDao"/>
-	<bean id="usertoactivityDao" class="org.dao.impl.UsertoactivityDaoImpl" parent="baseDao"/>
-	<bean id="usertoassociationDao" class="org.dao.impl.UsertoassociationDaoImpl" parent="baseDao"/>
-	 
-	<!--对业务逻辑进行依赖注入-->
-	<bean id="userService" class="org.service.impl.UserServiceImpl">
-		<property name="userDao" ref="userDao"/>
-	</bean>
-	<bean id="adminService" class="org.service.impl.AdminServiceImpl">
-		<property name="adminDao" ref="adminDao"/>
-	</bean>
-	<bean id="activityService" class="org.service.impl.ActivityServiceImpl">
-		<property name="activityDao" ref="activityDao"/>
-	</bean>
-	<bean id="associationService" class="org.service.impl.AssociationServiceImpl">
-		<property name="associationDao" ref="associationDao"/>
-	</bean>
-	<bean id="usertoactivityService" class="org.service.impl.UsertoactivityServiceImpl">
-		<property name="usertoactivityDao" ref="usertoactivityDao"/>
-	</bean>
-	<bean id="usertoassociationService" class="org.service.impl.UsertoassociationServiceImpl">
-		<property name="usertoassociationDao" ref="usertoassociationDao"></property>
-	</bean>
-	
-	<!--对CheckActivityAction的依赖注入-->
-	<bean id="checkActivityAction" name="" class="org.action.CheckActivityAction">
-		<property name="activityService" ref="activityService"></property>
+	<bean id="activityDaoImpl" class="org.dao.imp.ActivityDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
 	</bean>
 	</beans>

@@ -1,9 +1,9 @@
 package org.dao;
 
 import java.util.List;
-import org.vo.Association;
-import org.vo.User;
-import org.vo.Usertoassociation;
+import org.model.Association;
+import org.model.User;
+import org.model.Usertoassociation;
 
 public interface UsertoassociationDao {
 	public List selectAssociation(int userId,int pageNow,int pageSize);

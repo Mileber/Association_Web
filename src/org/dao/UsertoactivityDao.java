@@ -2,9 +2,9 @@ package org.dao;
 
 import java.util.List;
 
-import org.vo.Activity;
-import org.vo.User;
-import org.vo.Usertoactivity;
+import org.model.Activity;
+import org.model.User;
+import org.model.Usertoactivity;
 
 public interface UsertoactivityDao {
 	//分页查询指定用户的活动

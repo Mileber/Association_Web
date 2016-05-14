@@ -2,7 +2,7 @@ package org.dao;
 
 import java.util.List;
 
-import org.vo.Activity;
+import org.model.Activity;
 
 public interface ActivityDao {
 	public List selectActivityByTime(int pageNow,int pageSize);

@@ -1,5 +1,5 @@
 package org.dao;
-import org.vo.User;
+import org.model.User;
 
 public interface UserDao {
 	public User checkUser(String name,String password);

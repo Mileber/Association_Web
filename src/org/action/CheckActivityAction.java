@@ -1,16 +1,20 @@
 package org.action;
 
+import java.io.*;
 import java.util.*;
 import org.tool.Pager;
-import org.service.*;
-import org.vo.*;
+import org.dao.imp.*;
+import org.model.*;
 import com.opensymphony.xwork2.*;
 
 public class CheckActivityAction extends ActionSupport{
 	private int pageNow=1;
 	private int pageSize=4;
 	private Activity activity;
-	private ActivityService activityService;
+	private File photoFile;
+	private List list;
+	
+	private ActivityDaoImpl activityDaoImpl;
 	
 	public int getPageNow(){
 		return pageNow;
@@ -30,15 +34,33 @@ public class CheckActivityAction extends ActionSupport{
 	public void setActivity(Activity activity){
 		this.activity=activity;
 	}
-	public ActivityService getActivityService(){
-		return activityService;
+	public File getPhotoFile(){
+		return photoFile;
 	}
-	public void setActivityService(ActivityService activityService){
-		this.activityService=activityService;
+	public void setPhotoFile(File photoFile){
+		this.photoFile=photoFile;
+	}
+	/*public List getList(){
+		return 
+	}*/
+	public ActivityDaoImpl getActivityDaoImpl(){
+		return activityDaoImpl;
+	}
+	public void setActivityDaoImpl(ActivityDaoImpl activityDaoImpl){
+		this.activityDaoImpl=activityDaoImpl;
 	}
 	public String selectAllActivityByTime() throws Exception{
-		List list=activityService.selectActivityByTime(this.getPageNow(), this.getPageSize());
-		Pager page=new Pager(pageNow,activityService.selectActivitySize());
+		List list=activityDaoImpl.selectActivityByTime(pageNow, pageSize);
+		Pager page=new Pager(pageNow,activityDaoImpl.selectActivitySize());
+		Map request=(Map)ActionContext.getContext().get("request");
+		request.put("list", list);
+		request.put("page", page);
+		return SUCCESS;
+	}
+	
+	public String addActivity() throws Exception{
+		List list=activityDaoImpl.selectActivityByTime(this.getPageNow(), this.getPageSize());
+		Pager page=new Pager(pageNow,activityDaoImpl.selectActivitySize());
 		Map request=(Map)ActionContext.getContext().get("request");
 		request.put("list", list);
 		request.put("page", page);

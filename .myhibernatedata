@@ -1,10 +1,10 @@
 #MyEclipse Hibernate Properties
-#Sat May 07 15:07:29 CST 2016
-sessionFactoryName=vo.HibernateSessionFactory
+#Sat May 23 21:50:41 CST 2015
+sessionFactoryName=
 genBasicCompId=false
 profile=
 daoSFId=
-version=4.1
+version=3.3
 jndiPath=
 detectM2M=false
 reStrategyClass=
@@ -13,12 +13,12 @@ springDaoFile=
 useJavaTypes=true
 keyGenerator=native
 libInstallFolder=WebRoot/WEB-INF/lib
-addLibs2Project=false
+addLibs2Project=true
 genVersionTag=false
-sessionFactoryId=
+sessionFactoryId=sessionFactory
 basePersistenceClass=
 genAnnotations=false
 reSettingsFile=
-configFile=/Association/src/hibernate.cfg.xml
+configFile=/SpringHibernateStruts/src/applicationContext.xml
 createConfigFile=false
-addLibs2Classpath=false
+addLibs2Classpath=true

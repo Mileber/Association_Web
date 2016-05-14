@@ -1,5 +1,5 @@
 package org.dao;
-import org.vo.Association;
+import org.model.Association;
 
 public interface AssociationDao {
 	public void addAssociation(Association association);

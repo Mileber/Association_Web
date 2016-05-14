@@ -1,5 +1,5 @@
 package org.dao;
-import org.vo.Admin;
+import org.model.Admin;
 
 public interface AdminDao {
 	public Admin checkAdmin(String name,String password);
