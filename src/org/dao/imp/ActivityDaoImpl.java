@@ -98,7 +98,7 @@ public class ActivityDaoImpl extends BaseDAO implements ActivityDao{
 		try{
 			Session session = sessionFactory.openSession();
 			Transaction tx=session.beginTransaction();
-			Query query=session.createQuery("from activity");
+			Query query=session.createQuery("from Activity");
 			int size=query.list().size();
 			tx.commit();
 			session.close();
