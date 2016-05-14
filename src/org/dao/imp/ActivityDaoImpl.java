@@ -31,57 +31,45 @@ public class ActivityDaoImpl extends BaseDAO implements ActivityDao{
 
 	@Override
 	public void deleteActivity(int id) {
-		Session session=null;
-		Transaction tx=null;
 		try{
 			Activity activity=(Activity) this.selectActivity(id);
-			session=getSession();
-			tx=session.beginTransaction();
+			Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
 			session.delete(activity);
 			tx.commit();
-		}catch(Exception e){
-			if(tx!=null)tx.rollback();
-			e.printStackTrace();
-		}finally{
 			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public void updateActivity(Activity activity) {
-		Session session=null;
-		Transaction tx=null;
 		try{
-			session=getSession();
-			tx=session.beginTransaction();
+			Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
 			session.update(activity);
 			tx.commit();
-		}catch(Exception e){
-			if(tx!=null)tx.rollback();
-			e.printStackTrace();
-		}finally{
 			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 	}
 
 	@Override
 	public Activity selectActivity(int id) {
-		Session session=null;
-		Transaction tx=null;
 		Activity activity=null;
 		try{
-			session=getSession();
-			tx=session.beginTransaction();
-			Query query=session.createQuery("from activity where id=?");
+			Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
+			Query query=session.createQuery("from Activity where id=?");
 			query.setParameter(0, id);
 			query.setMaxResults(1);
 			activity=(Activity)query.uniqueResult();
 			tx.commit();
-		}catch(Exception e){
-			if(tx!=null)tx.rollback();
-			e.printStackTrace();
-		}finally{
 			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		return activity;
 	}
@@ -90,9 +78,9 @@ public class ActivityDaoImpl extends BaseDAO implements ActivityDao{
 	public List selectActivityByTime(int pageNow, int pageSize) {
 		List list=null;
 		try{
-			Session session = getSession();
+			Session session = sessionFactory.openSession();
 			Transaction tx=session.beginTransaction();
-			Query query=session.createQuery("from activity");
+			Query query=session.createQuery("from Activity");
 			query.setFirstResult(pageSize*(pageNow-1));
 			query.setMaxResults(pageSize);
 			list=query.list();
@@ -106,22 +94,18 @@ public class ActivityDaoImpl extends BaseDAO implements ActivityDao{
 
 	@Override
 	public int selectActivitySize() {
-		Session session=null;
-		Transaction tx=null;
-		int size=0;
+		
 		try{
-			session=getSession();
-			tx=session.beginTransaction();
+			Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
 			Query query=session.createQuery("from activity");
-			size=query.list().size();
+			int size=query.list().size();
 			tx.commit();
-		}catch(Exception e){
-			if(tx!=null)tx.rollback();
-			e.printStackTrace();
-		}finally{
 			session.close();
+			return size;
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
 		}
-		return size;
 	}
-
 }

@@ -11,8 +11,8 @@ public class CheckActivityAction extends ActionSupport{
 	private int pageNow=1;
 	private int pageSize=4;
 	private Activity activity;
-	private File photoFile;
 	private List list;
+	private Association association;
 	
 	private ActivityDaoImpl activityDaoImpl;
 	
@@ -34,15 +34,12 @@ public class CheckActivityAction extends ActionSupport{
 	public void setActivity(Activity activity){
 		this.activity=activity;
 	}
-	public File getPhotoFile(){
-		return photoFile;
+	public Association getAssociation(){
+		return association;
 	}
-	public void setPhotoFile(File photoFile){
-		this.photoFile=photoFile;
+	public void setAssociation(Association association){
+		this.association=association;
 	}
-	/*public List getList(){
-		return 
-	}*/
 	public ActivityDaoImpl getActivityDaoImpl(){
 		return activityDaoImpl;
 	}
@@ -59,11 +56,20 @@ public class CheckActivityAction extends ActionSupport{
 	}
 	
 	public String addActivity() throws Exception{
-		List list=activityDaoImpl.selectActivityByTime(this.getPageNow(), this.getPageSize());
-		Pager page=new Pager(pageNow,activityDaoImpl.selectActivitySize());
-		Map request=(Map)ActionContext.getContext().get("request");
-		request.put("list", list);
-		request.put("page", page);
+		Activity ac = activityDaoImpl.selectActivity(activity.getId());
+		if(ac!=null){
+			//this.setMessage("活动已存在");
+			return SUCCESS;
+		}
+		Activity a=new Activity();
+		a.setName(activity.getName());
+		a.setAssociation(activity.getAssociation());
+		a.setClass_(activity.getClass_());
+		a.setInfo(activity.getInfo());
+		a.setTime(activity.getTime());
+		a.setPhoto(activity.getPhoto());
+		activityDaoImpl.addActivity(a);
+		//this.setMessage("添加成功");
 		return SUCCESS;
 	}
 
