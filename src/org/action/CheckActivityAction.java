@@ -72,5 +72,43 @@ public class CheckActivityAction extends ActionSupport{
 		//this.setMessage("添加成功");
 		return SUCCESS;
 	}
+	
+	public String deleteActivity() throws Exception{
+		if(activity.getId()==null||activity.getId().equals("")){
+			//this.setMessage("请输入活动号");
+			return SUCCESS;
+		}
+		Activity ac=activityDaoImpl.selectActivity(activity.getId());
+		if(ac==null){
+			//this.setMessage("要删除的图书不存在！");
+			return SUCCESS;
+		}
+		activityDaoImpl.deleteActivity(activity.getId());
+		//this.setMessage("删除成功！");
+		return SUCCESS;
+	}
 
+	public String updateActivity() throws Exception{
+		Activity a=activityDaoImpl.selectActivity(activity.getId());
+		if(a==null){
+			//this.setMessage("要修改的图书不存在，请先查看是否存在该图书！");
+			return SUCCESS;
+		}
+		a.setName(activity.getName());
+		a.setAssociation(activity.getAssociation());
+		a.setClass_(activity.getClass_());
+		a.setInfo(activity.getInfo());
+		a.setTime(activity.getTime());
+		a.setPhoto(activity.getPhoto());
+		activityDaoImpl.updateActivity(a);
+		//this.setMessage("修改成功！");
+		return SUCCESS;
+	}
+	
+	public String selectActivity() throws Exception{
+		Activity a=activityDaoImpl.selectActivity(activity.getId());
+		Map request=(Map)ActionContext.getContext().get("request");
+		request.put("activity", a);
+		return SUCCESS;
+	}
 }

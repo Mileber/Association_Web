@@ -15,4 +15,8 @@ public interface UsertoactivityDao {
 	public void enrollActivity(Usertoactivity usertoactivity, Activity activity, User user);
 	//根据活动编号查询报名情况
 	public Usertoactivity selectByActivityId(int id);
+	//根据用户编号和活动编号查询报名情况
+	public Usertoactivity selectByUserIdandActivityId(int userId, int activityId);
+	//更新用户报名活动表
+	public void updateUsertoactivity(Usertoactivity usertoactivity);
 }

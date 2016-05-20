@@ -49,4 +49,14 @@
 			<ref bean="sessionFactory"/>
 		</property>
 	</bean>
+	<bean name="usertoactivityAction" class="org.action.UsertoActivityAction">
+		<property name="usertoactivityDaoImpl">
+			<ref bean="usertoactivityDaoImpl"/>
+		</property>
+	</bean>
+	<bean id="usertoactivityDaoImpl" class="org.dao.imp.UsertoactivityDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
 	</beans>

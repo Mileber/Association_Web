@@ -4,12 +4,18 @@ import java.util.List;
 import org.dao.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.model.Activity;
 import org.model.User;
 import org.model.Usertoactivity;
 
 public class UsertoactivityDaoImpl extends BaseDAO implements UsertoactivityDao{
+	SessionFactory sessionFactory;
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
 
 	@Override
 	public List selectActivity(int userId, int pageNow, int pageSize) {
@@ -78,6 +84,7 @@ public class UsertoactivityDaoImpl extends BaseDAO implements UsertoactivityDao{
 
 	@Override
 	public Usertoactivity selectByActivityId(int id) {
+		//TO-DO:”¶∏√ «List
 		Session session=null;
 		Transaction tx=null;
 		Usertoactivity ua=null;
@@ -93,6 +100,39 @@ public class UsertoactivityDaoImpl extends BaseDAO implements UsertoactivityDao{
 			session.close();
 		}
 		return ua;
+	}
+
+	@Override
+	public Usertoactivity selectByUserIdandActivityId(int userId, int activityId) {
+		Session session=null;
+		Transaction tx=null;
+		Usertoactivity ua=null;
+		try{
+			session=getSession();
+			tx=session.beginTransaction();
+			ua=(Usertoactivity)session.get(ua.getClass(), userId);
+			//TO-DO
+			tx.commit();
+		}catch(Exception e){
+			if(tx!=null)tx.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return ua;
+	}
+
+	@Override
+	public void updateUsertoactivity(Usertoactivity usertoactivity) {
+		try{
+			Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
+			session.update(usertoactivity);
+			tx.commit();
+			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 
