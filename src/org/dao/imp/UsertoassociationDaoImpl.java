@@ -7,13 +7,21 @@ import org.dao.UsertoactivityDao;
 import org.dao.UsertoassociationDao;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.model.Association;
 import org.model.User;
+import org.model.Usertoactivity;
 import org.model.Usertoassociation;
 
 public class UsertoassociationDaoImpl extends BaseDAO implements UsertoassociationDao{
 
+	SessionFactory sessionFactory;
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	@Override
 	public List selectAssociation(int userId, int pageNow, int pageSize) {
 		Session session=null;
@@ -88,6 +96,7 @@ public class UsertoassociationDaoImpl extends BaseDAO implements Usertoassociati
 			session=getSession();
 			tx=session.beginTransaction();
 			ua=(Usertoassociation)session.get(ua.getClass(), id);
+			//TO-DO:Ó¦¸ÃÎªList
 			tx.commit();
 		}catch(Exception e){
 			if(tx!=null)tx.rollback();
@@ -96,6 +105,39 @@ public class UsertoassociationDaoImpl extends BaseDAO implements Usertoassociati
 			session.close();
 		}
 		return ua;
+	}
+
+	@Override
+	public Usertoassociation selectByUserIdandAssociationId(int userId, int associationId) {
+		Session session=null;
+		Transaction tx=null;
+		Usertoassociation ua=null;
+		try{
+			session=getSession();
+			tx=session.beginTransaction();
+			ua=(Usertoassociation)session.get(ua.getClass(), userId);
+			//TO-DO
+			tx.commit();
+		}catch(Exception e){
+			if(tx!=null)tx.rollback();
+			e.printStackTrace();
+		}finally{
+			session.close();
+		}
+		return ua;
+	}
+
+	@Override
+	public void updateUsertoassociation(Usertoassociation usertoassociation) {
+		try{
+			Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
+			session.update(usertoassociation);
+			tx.commit();
+			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 
 	
