@@ -1,12 +1,21 @@
 package org.dao.imp;
+import java.util.List;
+
 import org.dao.*;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.model.Association;
 
 public class AssociationDaoImpl extends BaseDAO implements AssociationDao{
 
+	SessionFactory sessionFactory;
+	
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+	
 	@Override
 	public void addAssociation(Association association) {
 		Session session=null;
@@ -79,6 +88,40 @@ public class AssociationDaoImpl extends BaseDAO implements AssociationDao{
 			session.close();
 		}
 		return association;
+	}
+
+	@Override
+	public List selectallAssociation(int pageNow, int pageSize) {
+		List list=null;
+		try{
+			Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
+			Query query=session.createQuery("from Association");
+			query.setFirstResult(pageSize*(pageNow-1));
+			query.setMaxResults(pageSize);
+			list=query.list();
+			tx.commit();
+			session.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+	}
+
+	@Override
+	public int selectallAssociationSize() {
+		try{
+			Session session = sessionFactory.openSession();
+			Transaction tx=session.beginTransaction();
+			Query query=session.createQuery("from Association");
+			int size=query.list().size();
+			tx.commit();
+			session.close();
+			return size;
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	
 }

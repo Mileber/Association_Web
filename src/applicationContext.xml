@@ -38,7 +38,6 @@
 			</list>
 		</property>
 	</bean>
-	
 	<bean name="checkActivityAction" class="org.action.CheckActivityAction">
 		<property name="activityDaoImpl">
 			<ref bean="activityDaoImpl"/>
@@ -55,6 +54,51 @@
 		</property>
 	</bean>
 	<bean id="usertoactivityDaoImpl" class="org.dao.imp.UsertoactivityDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean name="adminAction" class="org.action.AdminAction">
+		<property name="adminDaoImpl">
+			<ref bean="adminDaoImpl"/>
+		</property>
+	</bean>
+	<bean id="adminDaoImpl" class="org.dao.imp.AdminDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean name="checkAssociationAction" class="org.action.CheckAssociationAction">
+		<property name="associationDaoImpl">
+			<ref bean="associationDaoImpl"/>
+		</property>
+	</bean>
+	<bean id="associationDaoImpl" class="org.dao.imp.AssociationDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean name="loginAction" class="org.action.LoginAction">
+		<property name="userDaoImpl">
+			<ref bean="userDaoImpl"/>
+		</property>
+	</bean>
+	<bean name="userAction" class="org.action.UserAction">
+		<property name="userDaoImpl">
+			<ref bean="userDaoImpl"/>
+		</property>
+	</bean>
+	<bean id="userDaoImpl" class="org.dao.imp.UserDaoImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory"/>
+		</property>
+	</bean>
+	<bean name="usertoassociationAction" class="org.action.UsertoassociationAction">
+		<property name="usertoassociationDaoImpl">
+			<ref bean="usertoassociationDaoImpl"/>
+		</property>
+	</bean>
+	<bean id="usertoassociationDaoImpl" class="org.dao.imp.UsertoassociationDaoImpl">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
 		</property>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-module
   type="WEB"
-  name="SpringHibernateStruts"
+  name="SpringHibernateStruts_master"
   id="myeclipse.1432354477001"
   context-root="/SpringHibernateStruts"
   j2ee-spec="6.0"
-  archive="SpringHibernateStruts.war">
+  archive="SpringHibernateStruts_master.war">
   <attributes>
     <attribute name="webrootdir" value="WebRoot" />
   </attributes>
