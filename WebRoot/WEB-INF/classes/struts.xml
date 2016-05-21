@@ -2,7 +2,99 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="default" namespace="/" extends="struts-default">
-		<action name="checkActivity" class="checkActivityAction" method="selectAllActivityByTime">
+		<!-- 关于Activity的Action -->
+		<action name="checkActivityByTime" class="checkActivityAction" method="selectAllActivityByTime">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="addActivity" class="checkActivityAction" method="addActivity">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="deleteActivity" class="checkActivityAction" method="deleteActivity">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="updateActivity" class="checkActivityAction" method="updateActivity">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="selectActivity" class="checkActivityAction" method="selectActivity">
+			<result name="success">/result.jsp</result>
+		</action>
+		
+		<!-- 关于Admin的Action -->
+		<action name="updateAdmin" class="AdminAction" method="updateAdmin">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="addAdmin" class="AdminAction" method="addAdmin">
+			<result name="success">/result.jsp</result>
+		</action>
+		
+		<!-- 关于Association的Action -->
+		<action name="selectallAssociation" class="CheckAssociationAction" method="selectallAssociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="seleceAssociation" class="CheckAssociationAction" method="seleceAssociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="searchAssociation" class="CheckAssociationAction" method="searchAssociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="addAssociation" class="CheckAssociationAction" method="addAssociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="updateAssociation" class="CheckAssociationAction" method="updateAssociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="deleteAssociation" class="CheckAssociationAction" method="delelteAssociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="updateLikeAssociation" class="CheckAssociationAction" method="updateLikeAssociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		
+		<!-- 关于User的Action -->
+		<action name="login" class="LoginAction">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="showUser" class="UserAction" method="showUser">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="updateUser" class="UserAction" method="updateUser">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="addUser" class="UserAction" method="addUser">
+			<result name="success">/result.jsp</result>
+		</action>
+		
+		<!-- 关于UsertoAsssociation的Action -->
+		<action name="selectUsertoassociationByAssociationId" class="UsertoassoicationAction" method="selectUsertoassociationByAssociationId">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="selectUsertoassociationByUserId" class="UsertoassoicationAction" method="selectUsertoassociationByUserId">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="addUsertoassociation" class="UsertoassoicationAction" method="addUsertoassociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="agreeUsertoassociation" class="UsertoassoicationAction" method="agreeUsertoassociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="rejectUsertoassociation" class="UsertoassoicationAction" method="rejectUsertoassociation">
+			<result name="success">/result.jsp</result>
+		</action>
+		
+		<!-- 关于UsertoActivity的Action -->
+		<action name="selectUsertoactivityByActivityId" class="UsertoActivityAction" method="selectUsertoactivityByActivityId">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="selectUsertoactivityByUserId" class="UsertoActivityAction" method="selectUsertoactivityByUserId">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="addUsertoactivity" class="UsertoActivityAction" method="addUsertoactivity">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="agreeUsertoactivity" class="UsertoActivityAction" method="agreeUsertoactivity">
+			<result name="success">/result.jsp</result>
+		</action>
+		<action name="rejectUsertoactivity" class="UsertoActivityAction" method="rejectUsertoactivity">
 			<result name="success">/result.jsp</result>
 		</action>
 	</package>

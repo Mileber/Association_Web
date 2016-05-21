@@ -7,6 +7,6 @@
   </head> 
   
   <body>
-    <a href="checkActivity.action" target="right">click</a>
+    <a href="checkActivityByTime.action" target="right">click</a>
   </body>
 </html>
