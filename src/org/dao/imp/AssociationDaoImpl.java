@@ -76,8 +76,7 @@ public class AssociationDaoImpl extends BaseDAO implements AssociationDao{
 		try{
 			session=getSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("from Association where id=?");
-			query.setParameter(0, id);
+			Query query=session.createQuery("from Association where id='" + id + "'");
 			query.setMaxResults(1);
 			association=(Association)query.uniqueResult();
 			tx.commit();

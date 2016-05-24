@@ -51,8 +51,10 @@
 		</action>
 		
 		<!-- 关于User的Action -->
-		<action name="login" class="LoginAction">
-			<result name="success">/result.jsp</result>
+		<action name="login" class="loginAction">
+			<result name="error">/result.jsp</result>
+			<result name="admin">/result.jsp</result>
+			<result name="user">/login_success.jsp</result>
 		</action>
 		<action name="showUser" class="UserAction" method="showUser">
 			<result name="success">/result.jsp</result>

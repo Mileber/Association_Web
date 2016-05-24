@@ -31,9 +31,8 @@ public class UsertoassociationDaoImpl extends BaseDAO implements Usertoassociati
 			session=getSession();
 			tx=session.beginTransaction();
 			Query query=session.createQuery("select u.name,e.associaId,a.name,e.status " +
-					"from user as u,usertoassociation as e,association as a " +
-					"where e.userId=? and e.userId=u.id and e.associaId=a.id");
-			query.setParameter(0, userId);
+					"from User as u, Usertoassociation as e, Association as a " +
+					"where e.userId='" + userId + "' and e.userId=u.id and e.associaId=a.id");
 			query.setFirstResult(pageSize*(pageNow-1));
 			query.setMaxResults(pageSize);
 			list=query.list();
@@ -55,7 +54,7 @@ public class UsertoassociationDaoImpl extends BaseDAO implements Usertoassociati
 		try{
 			session=getSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("from usertoassociation where userId=?");
+			Query query=session.createQuery("from Usertoassociation where userId='" + userId + "'");
 			query.setParameter(0, userId);
 			size=query.list().size();
 			tx.commit();

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" pageEncoding="gb2312"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 
 <html>
@@ -19,6 +19,5 @@
     		</tr>
     	</s:iterator>
     </table>
-    hello
   </body>
 </html>
