@@ -13,9 +13,7 @@ public class UserDaoImpl extends BaseDAO implements UserDao{
 		try{
 			session=getSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("from user where name=? and password=?");
-			query.setParameter(0, name);
-			query.setParameter(1, password);
+			Query query=session.createQuery("from User u where u.name='" + name + "' and u.password= '" + password +"'");
 			query.setMaxResults(1);
 			user=(User)query.uniqueResult();
 			tx.commit();

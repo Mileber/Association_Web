@@ -26,9 +26,8 @@ public class UsertoactivityDaoImpl extends BaseDAO implements UsertoactivityDao{
 			session=getSession();
 			tx=session.beginTransaction();
 			Query query=session.createQuery("select u.name,e.activityId,a.name,e.status " +
-					"from user as u,usertoactivity as e,activity as a " +
-					"where e.userId=? and e.userId=u.id and e.activityId=a.id");
-			query.setParameter(0, userId);
+					"from User as u, Usertoactivity as e, Activity as a " +
+					"where e.userId='" + userId + "' and e.userId=u.id and e.activityId=a.id");
 			query.setFirstResult(pageSize*(pageNow-1));
 			query.setMaxResults(pageSize);
 			list=query.list();
@@ -50,8 +49,7 @@ public class UsertoactivityDaoImpl extends BaseDAO implements UsertoactivityDao{
 		try{
 			session=getSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("from usertoactivity where userId=?");
-			query.setParameter(0, userId);
+			Query query=session.createQuery("from Usertoactivity where userId='" + userId + "'");
 			size=query.list().size();
 			tx.commit();
 		}catch(Exception e){

@@ -68,8 +68,7 @@ public class AdminDaoImpl extends BaseDAO implements AdminDao{
 		try{
 			session=getSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("from Admin where id=?");
-			query.setParameter(0, id);
+			Query query=session.createQuery("from Admin where id='"+id+"'");
 			query.setMaxResults(1);
 			admin=(Admin)query.uniqueResult();
 			tx.commit();
@@ -90,9 +89,7 @@ public class AdminDaoImpl extends BaseDAO implements AdminDao{
 		try{
 			session=getSession();
 			tx=session.beginTransaction();
-			Query query=session.createQuery("from admin where name=? and password=?");
-			query.setParameter(0, name);
-			query.setParameter(1, password);
+			Query query=session.createQuery("from Admin where name='" + name + "' and password='" + password + "'");
 			query.setMaxResults(1);
 			admin=(Admin)query.uniqueResult();
 			tx.commit();
